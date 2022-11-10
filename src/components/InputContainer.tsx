@@ -2,12 +2,16 @@ import React, {ChangeEvent, useState} from 'react';
 import s from './InputContainer.module.css'
 
 const InputContainer = () => {
+    const message = {
+
+    }
+
     const [valueInput, setValueInput] = useState('');
     const [inputStyle, setInputStyle] = useState<number>(0);
 
     // функция валидации e-mail (вернет true если значение прошло валидацию)
     const isValidateEmail = (email: string): boolean => {
-        const patternEmail = /^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/iu;
+        const patternEmail = /^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]((?=[^-]*[-]?[^-]*$)[-a-z0-9]{0,61}[a-z0-9])?\.)*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/iu;
         return patternEmail.test(email)
     };
 
@@ -24,7 +28,7 @@ const InputContainer = () => {
         }
         return contain;
     };
-// доменная зона (true если есть ошибка валидации)
+// доменная зона (вернет true если есть ошибка валидации)
     const isErrorZone = (hostZone: string): boolean => {
         const patternZone = /(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])/iu;
         //alert(`host: ${hostZone} result: ${patternZone.test(hostZone)}`)
@@ -44,10 +48,13 @@ const InputContainer = () => {
         if (isValidateEmail(email)) {
             setInputStyle(1);
         } else {
-           isErrorZone(hosts[hosts.length - 1]) && setInputStyle(5);
-           hosts[hosts.length - 1]
-               ? isContainDash(hosts.slice(0,-1)) && setInputStyle(4)
-               : isContainDash(hosts) &&setInputStyle(4);
+           if (isErrorZone(hosts[hosts.length - 1])) {
+               setInputStyle(5);
+           } else {
+               hosts[hosts.length - 1]
+                   ? isContainDash(hosts.slice(0, -1)) && setInputStyle(4)
+                   : isContainDash(hosts) && setInputStyle(4);
+           }
         }
     };
 
