@@ -4,8 +4,8 @@
 
 input {
     outline: 2px solid greenyellow;
-    height: 30px;
-    width: 230px;
+    height: 40px;
+    width: 300px;
     padding-left: 5px;
     border-radius: 5px;
 }
@@ -21,16 +21,41 @@ span[data-descr] {
 }
 
 span[data-descr]::after {
+    text-align: center;
     content: attr(data-descr);
     position: absolute;
-    /*left: -115px;*/
     top: 5px;
-    min-width: 200px;
+    min-width: 270px;
     outline: 2px solid red;
     border-radius: 10px;
     background-color: #ffffcc;
     padding: 15px;
     color: red;
+    font-size: 18px;
+    z-index: 1;
+}
+
+.validationSuccess {
+    outline: 2px solid greenyellow;
+    position: relative;
+    display: flex;
+}
+
+span[data-descr-success] {
+    position: relative;
+}
+
+span[data-descr-success]::after {
+    text-align: center;
+    content: attr(data-descr-success);
+    position: absolute;
+    top: 5px;
+    min-width: 270px;
+    outline: 2px solid greenyellow;
+    border-radius: 10px;
+    background-color: #ffffcc;
+    padding: 15px;
+    color: #3c5411;
     font-size: 18px;
     z-index: 1;
 }
