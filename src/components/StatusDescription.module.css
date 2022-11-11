@@ -1,0 +1,40 @@
+.descriptionBlock {
+
+}
+span[data-descr-error] {
+    position: relative;
+}
+
+span[data-descr-error]::after {
+    text-align: center;
+    content: attr(data-descr-error);
+    position: absolute;
+    top: 5px;
+    min-width: 270px;
+    outline: 2px solid red;
+    border-radius: 10px;
+    background-color: #ffffcc;
+    padding: 15px;
+    color: red;
+    font-size: 18px;
+    z-index: 1;
+}
+
+span[data-descr-success] {
+    position: relative;
+}
+
+span[data-descr-success]::after {
+    text-align: center;
+    content: attr(data-descr-success);
+    position: absolute;
+    top: 5px;
+    min-width: 270px;
+    outline: 2px solid greenyellow;
+    border-radius: 10px;
+    background-color: #ffffcc;
+    padding: 15px;
+    color: #3c5411;
+    font-size: 18px;
+    z-index: 1;
+}
