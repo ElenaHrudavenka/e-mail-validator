@@ -52,7 +52,7 @@ const InputContainer = () => {
         },
         {
             codeStatus: 8,
-            message: 'Field e-mail can\'t contain spaces and some symbols!',
+            message: 'Field e-mail can\'t contain spaces or some special symbols. Also, the domain must not exceed 63 characters!',
             status: 'error',
         },
     ]
