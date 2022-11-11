@@ -16,11 +16,11 @@ input {
     display: flex;
 }
 
-span[data-descr] {
+/*span[data-descr-error] {
     position: relative;
 }
 
-span[data-descr]::after {
+span[data-descr-error]::after {
     text-align: center;
     content: attr(data-descr);
     position: absolute;
@@ -33,7 +33,7 @@ span[data-descr]::after {
     color: red;
     font-size: 18px;
     z-index: 1;
-}
+}*/
 
 .validationSuccess {
     outline: 2px solid greenyellow;
@@ -41,6 +41,7 @@ span[data-descr]::after {
     display: flex;
 }
 
+/*
 span[data-descr-success] {
     position: relative;
 }
@@ -58,4 +59,4 @@ span[data-descr-success]::after {
     color: #3c5411;
     font-size: 18px;
     z-index: 1;
-}
+}*/
