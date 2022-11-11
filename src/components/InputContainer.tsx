@@ -32,7 +32,7 @@ const InputContainer = () => {
         },
         {
             codeStatus: 4,
-            message: 'Host name must contain domain name and zone!',
+            message: 'The email should be userName@hostName. Host must contain domain name and zone (separator is dot)!',
             status: 'error',
         },
         {
@@ -62,7 +62,7 @@ const InputContainer = () => {
 
     // функция валидации e-mail (вернет true если значение прошло валидацию)
     const isValidateEmail = (email: string): boolean => {
-        const patternEmail = /^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]((?=[^-]*[-]?[^-]*$)[-a-z0-9]{0,61}[a-z0-9])?\.)*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/iu;
+        const patternEmail = /^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]((?=[^-]*[-]?[^-]*$)[-a-z0-9]{0,61}[a-z0-9])?\.)+(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/iu;
         return patternEmail.test(email);
     };
 
@@ -92,32 +92,41 @@ const InputContainer = () => {
         return !patternZone.test(hostZone);
     };
 
+   const validationEmail = (email:string) => {
+        const [userName, hostName] = email.includes('@') ? email.split('@') : [email, ''];
+        const hosts: Array<string> = hostName.split('.');
+        if (!userName) {
+            return 2;
+        } else if (hosts.length<2) {
+            return 4;
+        } else if (isValidateEmail(email)) {
+            //debugger
+            return 1;
+        } else {
+            if (!email) {
+                return 7;
+            } else if (isContainDot(userName)) {
+                return 3;
+            } else if (isErrorZone(hosts[hosts.length - 1])) {
+                return 6;
+            } else {
+                let isDash = isContainDash(hosts[hosts.length - 1] ? hosts.slice(0, -1) : hosts)
+                 if (isDash) {
+                     return 5;
+                 }
+            }
+           // !inputStyle && setInputStyle(8);
+            return 8;
+        }
+    }
+
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setValueInput(e.currentTarget.value);
     };
 
     const onBlurHandler = () => {
         let email = valueInput.trim();
-        const [userName, hostName] = email.includes('@') ? email.split('@') : [email, ''];
-        const hosts: Array<string> = hostName.split('.');
-        !userName && setInputStyle(2);
-        !hostName.includes('.') && setInputStyle(4);
-        if (isValidateEmail(email)) {
-            setInputStyle(1);
-        } else {
-            if (!email) {
-                setInputStyle(7);
-            } else if (isContainDot(userName)) {
-                setInputStyle(3);
-            } else if (isErrorZone(hosts[hosts.length - 1])) {
-                setInputStyle(6);
-            } else {
-                hosts[hosts.length - 1]
-                    ? isContainDash(hosts.slice(0, -1)) && setInputStyle(5)
-                    : isContainDash(hosts) && setInputStyle(5);
-                !inputStyle && setInputStyle(8);
-            }
-        }
+        setInputStyle(validationEmail(email));
     };
 
     const onFocusHandler = () => {
