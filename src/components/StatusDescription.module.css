@@ -1,28 +1,13 @@
-.inputBlock {
+.descriptionBlock {
 
 }
-
-input {
-    outline: 2px solid greenyellow;
-    height: 40px;
-    width: 300px;
-    padding-left: 5px;
-    border-radius: 5px;
-}
-
-.validationError {
-    outline: 2px solid red;
-    position: relative;
-    display: flex;
-}
-
-/*span[data-descr-error] {
+span[data-descr-error] {
     position: relative;
 }
 
 span[data-descr-error]::after {
     text-align: center;
-    content: attr(data-descr);
+    content: attr(data-descr-error);
     position: absolute;
     top: 5px;
     min-width: 270px;
@@ -33,15 +18,8 @@ span[data-descr-error]::after {
     color: red;
     font-size: 18px;
     z-index: 1;
-}*/
-
-.validationSuccess {
-    outline: 2px solid greenyellow;
-    position: relative;
-    display: flex;
 }
 
-/*
 span[data-descr-success] {
     position: relative;
 }
@@ -59,4 +37,4 @@ span[data-descr-success]::after {
     color: #3c5411;
     font-size: 18px;
     z-index: 1;
-}*/
+}
