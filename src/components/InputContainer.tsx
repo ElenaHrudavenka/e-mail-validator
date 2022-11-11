@@ -115,8 +115,8 @@ const InputContainer = () => {
                 hosts[hosts.length - 1]
                     ? isContainDash(hosts.slice(0, -1)) && setInputStyle(5)
                     : isContainDash(hosts) && setInputStyle(5);
+                !inputStyle && setInputStyle(8);
             }
-            !inputStyle && setInputStyle(8);
         }
     };
 
