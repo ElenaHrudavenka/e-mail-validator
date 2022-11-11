@@ -50,6 +50,11 @@ const InputContainer = () => {
             message: 'Field e-mail can\'t be empty!',
             status: 'error',
         },
+        {
+            codeStatus: 8,
+            message: 'Field e-mail can\'t contain spaces or some special symbols. Also, the domain must not exceed 63 characters!',
+            status: 'error',
+        },
     ]
 
     const [valueInput, setValueInput] = useState<string>('');
@@ -111,6 +116,7 @@ const InputContainer = () => {
                     ? isContainDash(hosts.slice(0, -1)) && setInputStyle(5)
                     : isContainDash(hosts) && setInputStyle(5);
             }
+            !inputStyle && setInputStyle(8);
         }
     };
 
