@@ -3,7 +3,7 @@ import s from './App.module.css'
 import InputContainer from "./components/InputContainer";
 import './App.module.css';
 
-function App() {
+const App = () => {
     return (
         <div className={s.App}>
             <span>Enter your e-mail: </span>
