@@ -1,13 +1,6 @@
 import React, {ChangeEvent} from 'react';
 import s from "./Input.module.css";
-
-type InputPropsType = {
-    valueInput: string,
-    inputStyle: number,
-    onChangeHandler: (e: ChangeEvent<HTMLInputElement>)=>void,
-    onBlurHandler: ()=>void,
-    onFocusHandler: ()=>void,
-}
+import { InputPropsType } from './InputContainer.type';
 
 const Input: React.FC<InputPropsType> = ({
                              valueInput,
