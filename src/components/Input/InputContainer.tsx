@@ -2,26 +2,24 @@ import React, {ChangeEvent, useState} from 'react';
 import StatusDescription from "../StatusDescription";
 import {statusMessage} from './InputContainer.const';
 import Input from "./Inlput";
-import {CheckContainsDash, CheckContainsDot, CheckValidateEmail, CheckZone} from "./InputContainer.helpers";
+import {checkContainsDash, checkContainsDot, checkValidateEmail, checkZone} from "./InputContainer.helpers";
 
 export const InputContainer = () => {
         const [valueInput, setValueInput] = useState<string>('');
         const [inputStyle, setInputStyle] = useState<number>(0);
 
-
-
         // возвращает числовое значение - код для обработки ошибок и применения соответствующего стиля
         const validationEmail = (email: string): number => {
             const [userName, hostName] = email.includes('@') ? email.split('@') : [email, ''];
             const hosts: Array<string> = hostName.split('.');
-            const isDash = CheckContainsDash(hosts[hosts.length - 1] ? hosts.slice(0, -1) : hosts);
+            const isDash = checkContainsDash(hosts[hosts.length - 1] ? hosts.slice(0, -1) : hosts);
 
             if (!userName) return 2;
             if (hosts.length < 2) return 4;
-            if (CheckValidateEmail(email)) return 1;
+            if (checkValidateEmail(email)) return 1;
             if (!email) return 7;
-            if (CheckContainsDot(userName)) return 3;
-            if (CheckZone(hosts[hosts.length - 1])) return 6;
+            if (checkContainsDot(userName)) return 3;
+            if (checkZone(hosts[hosts.length - 1])) return 6;
             if (isDash) return 5;
 
             return 8;
