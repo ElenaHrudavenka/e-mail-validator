@@ -33,7 +33,7 @@ export const statusMessage: Array<MessageType> = [
     },
     {
         codeStatus: 6,
-        message: 'Domain zone not entered or consist errors!',
+        message: 'The domain zone is not entered or contains errors!',
         status: 'error',
     },
     {

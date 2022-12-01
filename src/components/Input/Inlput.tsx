@@ -1,14 +1,15 @@
 import React, {ChangeEvent} from 'react';
 import s from "./Input.module.css";
-import { InputPropsType } from './InputContainer.type';
+import {InputPropsType} from './InputContainer.type';
 
 const Input: React.FC<InputPropsType> = ({
-                             valueInput,
-                             inputStyle,
-                             onChangeHandler,
-                             onBlurHandler,
-                             onFocusHandler,
-                         }) => {
+                                             valueInput,
+                                             inputStyle,
+                                             onChangeHandler,
+                                             onBlurHandler,
+                                             onFocusHandler,
+                                             name,
+                                         }) => {
     return (
         <div className={s.inputBlock}>
             <input value={valueInput}

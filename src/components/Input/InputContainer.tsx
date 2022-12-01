@@ -4,28 +4,28 @@ import {statusMessage} from './InputContainer.const';
 import Input from "./Inlput";
 import {checkContainsDash, checkContainsDot, checkValidateEmail, checkZone} from "./InputContainer.helpers";
 
+// возвращает числовое значение - код для обработки ошибок и применения соответствующего стиля
+export const validationEmail = (email: string): number => {
+    const [userName, hostName] = email.includes('@') ? email.split('@') : [email, ''];
+    const hosts: Array<string> = hostName.split('.');
+    const isDash = checkContainsDash(hosts[hosts.length - 1] ? hosts.slice(0, -1) : hosts);
+
+    if (!email) return 7;
+    if (!userName) return 2;
+    if (hosts.length < 2) return 4;
+    if (checkValidateEmail(email)) return 1;
+    if (checkContainsDot(userName)) return 3;
+    if (checkZone(hosts[hosts.length - 1])) return 6;
+    if (isDash) return 5;
+
+    return 8;
+}
+
 export const InputContainer = () => {
         const [valueInput, setValueInput] = useState<string>('');
         const [inputStyle, setInputStyle] = useState<number>(0);
 
-        // возвращает числовое значение - код для обработки ошибок и применения соответствующего стиля
-        const validationEmail = (email: string): number => {
-            const [userName, hostName] = email.includes('@') ? email.split('@') : [email, ''];
-            const hosts: Array<string> = hostName.split('.');
-            const isDash = checkContainsDash(hosts[hosts.length - 1] ? hosts.slice(0, -1) : hosts);
-
-            if (!userName) return 2;
-            if (hosts.length < 2) return 4;
-            if (checkValidateEmail(email)) return 1;
-            if (!email) return 7;
-            if (checkContainsDot(userName)) return 3;
-            if (checkZone(hosts[hosts.length - 1])) return 6;
-            if (isDash) return 5;
-
-            return 8;
-        }
-
-        const onChangeHandler = (e: ChangeEvent<HTMLInputElement>): void=> {
+        const onChangeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
             setValueInput(e.currentTarget.value);
         };
 
@@ -34,7 +34,7 @@ export const InputContainer = () => {
             setInputStyle(validationEmail(email));
         };
 
-        const onFocusHandler = (): void=> {
+        const onFocusHandler = (): void => {
             setInputStyle(0);
         };
 
@@ -45,9 +45,12 @@ export const InputContainer = () => {
                        onChangeHandler={onChangeHandler}
                        onBlurHandler={onBlurHandler}
                        onFocusHandler={onFocusHandler}
+                       name={'inputEmail'}
                 />
-                <StatusDescription status={statusMessage[inputStyle].status}
-                                   message={statusMessage[inputStyle].message}
+                <StatusDescription
+                    id={'description_id'}
+                    message={statusMessage[inputStyle].message}
+                    status={statusMessage[inputStyle].status}
                 />
             </div>
         );
